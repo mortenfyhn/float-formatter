@@ -3,7 +3,7 @@
 #include <random>
 #include <vector>
 
-#include "alignprint.hpp"
+#include "float-formatter.hpp"
 
 using std::cout;
 using std::vector;

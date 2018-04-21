@@ -1,15 +1,9 @@
-#include "alignprint.hpp"
+#include "float-formatter.hpp"
 
-// #include <algorithm>  // max
-// #include <cmath>
-// #include <cstdio>
-// #include <iomanip>   // setw
-// #include <iostream>  // scientific
-// #include <map>
+#include <iostream>  // ios_base::precision
 #include <regex>
-#include <sstream>  // ostringstream
+#include <sstream>  // std::ostringstream
 #include <string>
-// #include <utility>
 
 using std::string;
 

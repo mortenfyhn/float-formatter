@@ -13,11 +13,11 @@ target_include_directories(Catch INTERFACE ${CATCH_INCLUDE_DIR})
 set(
     TEST_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/test-main.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/test-alignprint.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/alignprint.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/test-float-formatter.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/float-formatter.cpp
     )
 
 add_executable(tests ${TEST_SOURCES})
 target_link_libraries(tests Catch)
 
-add_executable(main main.cpp alignprint.cpp)
+add_executable(main main.cpp float-formatter.cpp)
