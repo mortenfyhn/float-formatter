@@ -15,10 +15,10 @@ std::string padWithSpaces(std::string&& s, size_t width);
 
 std::string format(double x, size_t width)
 {
-    if (x == 0)
+    if (x == 0.0)
         return std::string(width - 1, ' ') + '.';
 
-    std::string s = convertToString(x, width);
+    auto s = convertToString(x, width);
 
     if (isScientific(s))
     {
@@ -71,26 +71,23 @@ std::string shortenNonScientific(std::string&& s, size_t width)
 
 std::string shortenScientific(std::string&& s, size_t width)
 {
-    int chars_to_remove = s.size() - width;
+    auto const chars_to_remove = static_cast<int>(s.size() - width);
     if (chars_to_remove < 0)
-        chars_to_remove = 0;
-    int position_exponent = s.find('e');
-    int remove_from_position = position_exponent - chars_to_remove;
-    s.erase(remove_from_position, chars_to_remove);
+        return s;
 
-    return s;
+    auto const position_exponent = s.find('e');
+    auto const remove_from_position = position_exponent - chars_to_remove;
+    return s.erase(remove_from_position, chars_to_remove);
 }
 
 std::string eraseDanglingDot(std::string&& s)
 {
     std::regex static const r(R"(\.(\D|$))");
-    s = regex_replace(s, r, "$1");
-    return s;
+    return std::regex_replace(s, r, "$1");
 }
 
 std::string padWithSpaces(std::string&& s, size_t width)
 {
-    if (s.size() < width)
-        s.insert(s.begin(), width - s.size(), ' ');
+    s.insert(s.begin(), width - s.size(), ' ');
     return s;
 }
