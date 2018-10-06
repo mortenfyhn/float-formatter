@@ -57,10 +57,17 @@ TEST_CASE("Floats that need scientific notation")
     REQUIRE(format(-1.234e-6) == " -1e-6");
 }
 
-TEST_CASE("Zero should be a dot")
+TEST_CASE("Zero should be a '0' by default")
 {
-    REQUIRE(format(0) == "     .");
-    REQUIRE(format(0, 8) == "       .");
+    REQUIRE(format(0) == "     0");
+    REQUIRE(format(0, 8) == "       0");
+}
+
+TEST_CASE("Zero should be a '.' if specified")
+{
+    REQUIRE(format(0, 1, true) == ".");
+    REQUIRE(format(0, 6, true) == "     .");
+    REQUIRE(format(0, 8, true) == "       .");
 }
 
 TEST_CASE("Check invariants with random input")
