@@ -8,7 +8,7 @@
 using std::string;
 
 string convertToString(double x, size_t width);
-bool isScientific(const string& s);
+bool isScientific(string const& s);
 string stripScientific(string&& s);
 string shortenScientific(string&& s, size_t width);
 string shortenNonScientific(string&& s, size_t width);
@@ -50,18 +50,18 @@ string stripScientific(string&& s)
 {
     // Remove needless characters in scientific notation
     // -1e+06 -> -1e6
-    static const std::regex r1(R"((-?\d\.?[1-9]*)0*e\+?(-?)0*([1-9]*))");
+    std::regex static const r1(R"((-?\d\.?[1-9]*)0*e\+?(-?)0*([1-9]*))");
     s = std::regex_replace(s, r1, "$1e$2$3");
 
     // Remove decimal separator when there are no decimals
     // 1.e6 -> 1e6
-    static const std::regex r2(R"(([1-9])\.e)");
+    std::regex static const r2(R"(([1-9])\.e)");
     s = std::regex_replace(s, r2, "$1e");
 
     return s;
 }
 
-bool isScientific(const string& s)
+bool isScientific(string const& s)
 {
     return s.find('e') != string::npos;
 }
@@ -85,7 +85,7 @@ string shortenScientific(string&& s, size_t width)
 
 string eraseDanglingDot(string&& s)
 {
-    static const std::regex r(R"(\.(\D|$))");
+    std::regex static const r(R"(\.(\D|$))");
     s = regex_replace(s, r, "$1");
     return s;
 }

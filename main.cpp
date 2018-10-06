@@ -9,11 +9,11 @@ using std::cout;
 using std::vector;
 using matrix = vector<vector<double>>;
 
-void print(const matrix& m)
+void print(matrix const& m)
 {
-    for (const auto& r : m)
+    for (auto const& r : m)
     {
-        for (const auto& e : r)
+        for (auto const& e : r)
             cout << format(e) << ' ';
         cout << '\n';
     }
