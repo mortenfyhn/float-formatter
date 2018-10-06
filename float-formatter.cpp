@@ -5,22 +5,20 @@
 #include <sstream>   // std::ostringstream
 #include <string>    // std::string
 
-using std::string;
+std::string convertToString(double x, size_t width);
+bool isScientific(std::string const& s);
+std::string stripScientific(std::string&& s);
+std::string shortenScientific(std::string&& s, size_t width);
+std::string shortenNonScientific(std::string&& s, size_t width);
+std::string eraseDanglingDot(std::string&& s);
+std::string padWithSpaces(std::string&& s, size_t width);
 
-string convertToString(double x, size_t width);
-bool isScientific(string const& s);
-string stripScientific(string&& s);
-string shortenScientific(string&& s, size_t width);
-string shortenNonScientific(string&& s, size_t width);
-string eraseDanglingDot(string&& s);
-string padWithSpaces(string&& s, size_t width);
-
-string format(double x, size_t width)
+std::string format(double x, size_t width)
 {
     if (x == 0)
-        return string(width - 1, ' ') + '.';
+        return std::string(width - 1, ' ') + '.';
 
-    string s = convertToString(x, width);
+    std::string s = convertToString(x, width);
 
     if (isScientific(s))
     {
@@ -38,7 +36,7 @@ string format(double x, size_t width)
     return s;
 }
 
-string convertToString(double x, size_t width)
+std::string convertToString(double x, size_t width)
 {
     std::ostringstream ss;
     ss.precision(width);
@@ -46,7 +44,7 @@ string convertToString(double x, size_t width)
     return ss.str();
 }
 
-string stripScientific(string&& s)
+std::string stripScientific(std::string&& s)
 {
     // Remove needless characters in scientific notation
     // -1e+06 -> -1e6
@@ -61,17 +59,17 @@ string stripScientific(string&& s)
     return s;
 }
 
-bool isScientific(string const& s)
+bool isScientific(std::string const& s)
 {
-    return s.find('e') != string::npos;
+    return s.find('e') != std::string::npos;
 }
 
-string shortenNonScientific(string&& s, size_t width)
+std::string shortenNonScientific(std::string&& s, size_t width)
 {
     return s.substr(0, width);
 }
 
-string shortenScientific(string&& s, size_t width)
+std::string shortenScientific(std::string&& s, size_t width)
 {
     int chars_to_remove = s.size() - width;
     if (chars_to_remove < 0)
@@ -83,14 +81,14 @@ string shortenScientific(string&& s, size_t width)
     return s;
 }
 
-string eraseDanglingDot(string&& s)
+std::string eraseDanglingDot(std::string&& s)
 {
     std::regex static const r(R"(\.(\D|$))");
     s = regex_replace(s, r, "$1");
     return s;
 }
 
-string padWithSpaces(string&& s, size_t width)
+std::string padWithSpaces(std::string&& s, size_t width)
 {
     if (s.size() < width)
         s.insert(s.begin(), width - s.size(), ' ');
