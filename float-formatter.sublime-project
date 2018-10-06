@@ -1,0 +1,19 @@
+{
+    "folders":
+    [
+        {
+            "path": "."
+        }
+    ],
+
+    "settings":
+    {
+        "ecc_flags_sources":
+        [
+            {
+                "file": "compile_commands.json",
+                "prefix_paths": [ "$project_base_path/build" ]
+            },
+        ],
+    }
+}
