@@ -5,6 +5,7 @@
 #include <sstream>   // std::ostringstream
 #include <string>    // std::string
 
+std::string zeroString(size_t width, bool zero_as_dot);
 std::string convertToString(double x, size_t width);
 bool isScientific(std::string const& s);
 std::string stripScientific(std::string&& s);
@@ -13,10 +14,10 @@ std::string shortenNonScientific(std::string&& s, size_t width);
 std::string eraseDanglingDot(std::string&& s);
 std::string padWithSpaces(std::string&& s, size_t width);
 
-std::string format(double x, size_t width)
+std::string format(double x, size_t width, bool zero_as_dot)
 {
     if (x == 0.0)
-        return std::string(width - 1, ' ') + '.';
+        return zeroString(width, zero_as_dot);
 
     auto s = convertToString(x, width);
 
@@ -34,6 +35,12 @@ std::string format(double x, size_t width)
     s = padWithSpaces(std::move(s), width);
 
     return s;
+}
+
+std::string zeroString(size_t width, bool zero_as_dot)
+{
+    auto const zero_symbol = zero_as_dot ? '.' : '0';
+    return std::string(width - 1, ' ') + zero_symbol;
 }
 
 std::string convertToString(double x, size_t width)
