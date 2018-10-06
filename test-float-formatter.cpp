@@ -1,9 +1,8 @@
 #include "catch/catch.hpp"
 #include "float-formatter.hpp"
 
-#include <cmath>
-#include <iostream>
-#include <random>
+#include <cmath>   // std::pow
+#include <random>  // std::default_random_engine
 #include <regex>
 #include <string>
 
