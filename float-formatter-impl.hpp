@@ -1,5 +1,3 @@
-#include "float-formatter.hpp"
-
 #include <iostream>  // ios_base::precision
 #include <regex>     // std::regex, std::regex_replace
 #include <sstream>   // std::ostringstream
